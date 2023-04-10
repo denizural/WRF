@@ -163,6 +163,7 @@
 #define RSL_MALLOC(T,N)  (T *)rsl_malloc(__FILE__,__LINE__,(sizeof(T))*(N))
 #define RSL_FREE(P)      rsl_free(&(P))
 
+int buffer_size_for_proc( int P, int code );
 char * buffer_for_proc ( int P, int size, int code ) ;
 void * rsl_malloc( char * f, int l, int s ) ;
 void rsl_free( char ** p ) ;
@@ -193,4 +194,25 @@ typedef struct rsl_list {
   short info2 ;                 /* blank info field */
 #endif
 } rsl_list_t ;
+
+void F_PACK_LINT (int *inbuf, int *outbuf, int *memorder, int *js, int *je,
+                  int *ks, int *ke, int *is, int *ie, int *jms, int *jme,
+                  int *kms, int *kme, int *ims, int *ime, int *curs);
+
+void F_PACK_INT (int *inbuf, int *outbuf, int *memorder, int *js, int *je,
+                 int *ks, int *ke, int *is, int *ie, int *jms, int *jme,
+                 int *kms, int *kme, int *ims, int     *ime, int *curs);
+
+void F_UNPACK_LINT (int *inbuf, int *outbuf, int *memorder, int *js, int *je,
+                    int *ks, int *ke, int *is, int *ie, int *jms, int *jme, 
+                    int *kms, int *kme, int *ims, int *ime, int *curs );
+
+void F_UNPACK_INT (int *inbuf, int *outbuf, int *memorder, int *js, int *je,
+                   int *ks, int *ke, int *is, int *ie, int *jms, int *jme,
+                   int *kms, int *kme, int *ims, int *ime, int *curs );
+
+void TASK_FOR_POINT_MESSAGE();
+void TASK_FOR_POINT (int_p i_p, int_p j_p, int_p ids_p, int_p ide_p, int_p jds_p,
+                    int_p jde_p, int_p npx_p, int_p npy_p, int_p Px_p, int_p Py_p,
+                    int_p minx_p, int_p miny_p, int_p ierr_p );
 
