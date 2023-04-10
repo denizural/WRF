@@ -7,6 +7,7 @@ Revisions:
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 #include "grib_lookup.h"	/* for Parm/Ctr/Levl/Mdl_defn */
 #include "dprints.h"		/* for dprints */
 #include "gribfuncs.h"		/* prototypes */
