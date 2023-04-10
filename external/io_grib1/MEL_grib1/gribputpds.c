@@ -12,6 +12,7 @@
 #endif
 #include "dprints.h"		/* for dprints */
 #include "gribfuncs.h"		/* prototypes */
+#include "set_bytes.h"
 
 /*
 *
