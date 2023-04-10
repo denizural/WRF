@@ -18,6 +18,7 @@
 #include "dprints.h"		/* for dprints */
 #include "grib_lookup.h"	/* parm/model/lvl defn */
 #include "gribfuncs.h"		/* prototypes */
+#include "set_bytes.h"
 
 /*
 *
