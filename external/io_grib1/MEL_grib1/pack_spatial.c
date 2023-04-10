@@ -16,6 +16,7 @@
 #include "dprints.h"		/* for dprints */
 #include "gribfuncs.h"		/* prototypes */
 #include "isdb.h"		/* WORD_BIT_CNT defn */
+#include "set_bytes.h"
 
 /*
 ****************************************************************
