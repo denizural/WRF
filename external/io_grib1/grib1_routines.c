@@ -20,6 +20,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <limits.h>
+#include <string.h>
+#include <unistd.h>
+#include <math.h>
 
 char *trim (char *str);
 int index_metadata(GribInfo *gribinfo, MetaData *metadata, int fid);
