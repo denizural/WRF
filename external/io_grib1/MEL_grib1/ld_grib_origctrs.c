@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "grib_lookup.h"
 #include "dprints.h"		/* for dprints */
 #include "gribfuncs.h"		/* prototypes */
@@ -153,7 +154,7 @@ BYE:
 *
 * A.7       RETURN with status
 */
-    if (fLook)  close(fLook);
+    if (fLook)  fclose(fLook);
     DPRINT2 ("Exiting %s, Stat=%d\n", func, stat);
     return (stat);
 /*
