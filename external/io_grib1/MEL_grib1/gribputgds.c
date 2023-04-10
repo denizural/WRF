@@ -13,6 +13,8 @@
 #include "dprints.h"		/* for dprints */
 #include "gribfuncs.h"		/* prototypes */
 #include <math.h>
+#include "gribputgds.h"
+#include "set_bytes.h"
 
 /*
 ************************************************************************
