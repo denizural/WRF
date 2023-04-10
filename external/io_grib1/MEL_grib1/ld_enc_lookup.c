@@ -7,6 +7,7 @@
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "grib_lookup.h"  	/* combined lookup structs */
 #include "dprints.h"		/* for dprints */
 #include "gribfuncs.h"		/* prototypes */
