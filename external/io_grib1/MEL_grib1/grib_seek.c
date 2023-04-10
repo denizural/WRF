@@ -13,6 +13,7 @@
 #include <math.h>
 #include "dprints.h"		/* for dprints */
 #include "gribfuncs.h"		/* prototypes */
+#include "grib_seek.h"
 
 /*
 **********************************************************************
