@@ -23,13 +23,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <math.h>
+#include "gribhdr2file.h"
 
-char *trim (char *str);
-int index_metadata(GribInfo *gribinfo, MetaData *metadata, int fid);
-int index_times(GribInfo *gribinfo, Times *times);
-int find_time(Times *times, char valid_time[15]);
-int get_gridnav_projection(int wrf_projection);
-int get_byte(int input_int, int bytenum);
 
 /* 
  * Allocate space for the fileindex structure
@@ -831,20 +826,6 @@ int READ_GRIB(FileIndex *fileindex, int *fid, int *index, float *data)
 #define MAX1B_FCST_HOURS MAX1B_FCST*MINS_IN_HOUR*SECS_IN_MIN
 #define MAX1B_FCST_DAYS MAX1B_FCST*HOURS_IN_DAY*MINS_IN_HOUR*SECS_IN_MIN
 
-typedef struct {
-  int time_range;
-  int fcst_unit;
-  int P1;
-  int P2;
-
-  int time_range_ext;
-  int fcst_unit_ext_1;
-  int fcst_unit_ext_2;
-  int P1_ext;
-  int P2_ext;
-} FcstTimeStruct;
-
-int get_fcst_time(int accum_period, int fcst_secs, FcstTimeStruct *fcst_time);
 
 /****************************************************************************
  *

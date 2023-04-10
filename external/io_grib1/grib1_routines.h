@@ -144,6 +144,19 @@ typedef struct {
   Grib1_Tables *grib_tables;
 } Grid_Info;
 
+typedef struct {
+    int time_range;
+    int fcst_unit;
+    int P1;
+    int P2;
+
+    int time_range_ext;
+    int fcst_unit_ext_1;
+    int fcst_unit_ext_2;
+    int P1_ext;
+    int P2_ext;
+} FcstTimeStruct;
+
 int GET_FILEINDEX_SIZE(int *size);
 
 int ALLOC_INDEX_FILE(FileIndex *fileindex);
@@ -231,3 +244,16 @@ int GET_REGION_CENTER(char *MemoryOrderIn, int *projection,
 		      float *truelat2, int *region_xsize, int *region_ysize, 
 		      float *region_center_lat, float *region_center_lon, 
 		      int strlen1);
+
+int index_metadata(GribInfo *gribinfo, MetaData *metadata, int fid);
+int index_times(GribInfo *gribinfo, Times *times);
+int find_time(Times *times, char valid_time[15]);
+int grib_time_format(char *DateStr, char *DateStrIn);
+int get_fcst_time(int accum_period, int fcst_secs, FcstTimeStruct *fcst_time);
+
+char *trim (char *str);
+int index_metadata(GribInfo *gribinfo, MetaData *metadata, int fid);
+int index_times(GribInfo *gribinfo, Times *times);
+int find_time(Times *times, char valid_time[15]);
+int get_gridnav_projection(int wrf_projection);
+int get_byte(int input_int, int bytenum);
