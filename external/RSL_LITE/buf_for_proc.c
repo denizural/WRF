@@ -148,7 +148,7 @@ fprintf(stderr,"buffer_for_proc %s %d : was %d, increasing to %d\n",
   return(ret) ;
 }
 
-show_tot_size()
+void show_tot_size()
 {
   int P ;
   int acc ;
