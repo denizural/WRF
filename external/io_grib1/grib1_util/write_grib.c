@@ -33,7 +33,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 #include "gribfuncs.h"
+#include "write_grib.h"
 
 int rg_write_grib(PDS_INPUT *pds, grid_desc_sec *gds, char filename[],
 	       float **data)
@@ -62,7 +65,7 @@ int rg_write_grib(PDS_INPUT *pds, grid_desc_sec *gds, char filename[],
   system(tmpstring);
   unlink(tmpfile);
  
-  close(fid);
+  fclose(fid);
 
   return(1);
 }
