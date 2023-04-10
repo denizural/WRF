@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h> 
+#include <string.h>
 #include "dprints.h"		/* for dprints */
 #include "gribfuncs.h"		/* prototypes */
+#include "grib_uthin.h"
 /*
   REVISION/MODIFICATION HISTORY:
        03/07/94 written by Mugur Georgescu CSC, Monterey CA
