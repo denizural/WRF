@@ -11,6 +11,7 @@
 #include "protos.h"
 #include "registry.h"
 #include "data.h"
+#include "misc.h"
 
 #define NULLCHARPTR   (char *) 0
 
