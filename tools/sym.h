@@ -89,7 +89,12 @@ struct sym_node
     int marked ;		/* general purpose marker */
 } ;
 
-sym_nodeptr sym_add() ;
-sym_nodeptr sym_get() ;
-
+int sym_init();
+sym_nodeptr sym_add(char *name) ;
+sym_nodeptr sym_get(char *name) ;
+sym_nodeptr new_sym_node();
+char ** node_name(sym_nodeptr p);
+sym_nodeptr* node_next(sym_nodeptr p);
+int show_entry(sym_nodeptr x);
+int sym_forget();
 #endif
