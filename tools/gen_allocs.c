@@ -9,6 +9,7 @@
 #include "registry.h"
 #include "data.h"
 #include "sym.h"
+#include "misc.h"
 
 int
 gen_alloc ( char * dirname )
