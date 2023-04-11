@@ -9,6 +9,7 @@
 #include "registry.h"
 #include "data.h"
 #include "sym.h"
+#include "gen_streams.h"
 
 int gen_streams(  char * dirname ) 
 {
@@ -539,7 +540,7 @@ gen_shutdown_closes ( FILE *fp )
 }
 
 /* generate the calls that main/wrf_ESMFMod.F uses in wrf_state_populate() */
-gen_med_open_esmf_calls ( FILE *fp )
+int gen_med_open_esmf_calls ( FILE *fp )
 {
   int i ;
   for ( i = 1 ; i < MAX_HISTORY ; i++ )
@@ -569,7 +570,7 @@ gen_med_open_esmf_calls ( FILE *fp )
 }
 
 /* generate the calls that main/wrf_ESMFMod.F uses in wrf_state_populate() */
-gen_med_find_esmf_coupling ( FILE *fp )
+int gen_med_find_esmf_coupling ( FILE *fp )
 {
   int i ;
   for ( i = 1 ; i < MAX_HISTORY ; i++ )
