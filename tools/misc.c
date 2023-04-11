@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <ctype.h>
 #ifdef _WIN32
 # define rindex(X,Y) strrchr(X,Y)
 # define index(X,Y) strchr(X,Y)
@@ -11,6 +13,7 @@
 #include "protos.h"
 #include "registry.h"
 #include "data.h"
+#include "misc.h"
 
 char *
 dimension_with_colons( char * pre , char * tmp , node_t * p , char * post )
