@@ -61,9 +61,11 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "sym.h"
+#include "symtab_gen.h"
 
-extern sym_nodeptr symget() ;
+// extern sym_nodeptr symget() ;
 
 static char ** symtab ;  /* 2-19-90 */
 
@@ -79,30 +81,20 @@ sym_init() /* 2-19-90, initialize symbol table package */
     return(0) ;
 }
 
-sym_nodeptr
-sym_add( name )
-char * name ;
+//sym_nodeptr sym_add( char *name)
+char* sym_add( char *name)
 {
-    sym_nodeptr new_sym_node(); 
-    char **node_name() ;
-    sym_nodeptr *node_next() ;
     return( symget( name, new_sym_node, node_name, node_next, symtab, 1 ) ) ;
 }
 
-sym_nodeptr
-sym_get( name )
-char * name ;
+//sym_nodeptr sym_get(char *name)
+char* sym_get(char *name)
 {
-    sym_nodeptr new_sym_node(); 
-    char **node_name() ;
-    sym_nodeptr *node_next() ;
     return( symget( name, new_sym_node, node_name, node_next, symtab, 0 ) ) ;
 }
 
-sym_nodeptr
-new_sym_node()
+sym_nodeptr new_sym_node()
 {
-    void * malloc() ;
     sym_nodeptr p ;
     p = (sym_nodeptr) malloc( sizeof( struct sym_node ) ) ;
     p->name = NULL ;
@@ -111,27 +103,21 @@ new_sym_node()
     return( p ) ;
 }
 
-char **
-node_name(p)
-sym_nodeptr p ;
+char** node_name(sym_nodeptr p)
 {
     char ** x ;
     x = &(p->name) ;
     return( x ) ;
 }
 
-sym_nodeptr *
-node_next(p)
-sym_nodeptr p ;
+sym_nodeptr* node_next(sym_nodeptr p)
 {
     sym_nodeptr *x ;
     x = &(p->next) ;
     return( x ) ;
 }
 
-int
-show_entry(x)
-sym_nodeptr x ;
+int show_entry(sym_nodeptr x)
 {
   int i ;
   if ( x == NULL ) return(0) ;
