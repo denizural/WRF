@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #ifdef _WIN32
 # define rindex(X,Y) strrchr(X,Y)
 # define index(X,Y) strchr(X,Y)
@@ -12,6 +13,7 @@
 #include "protos.h"
 #include "data.h"
 #include "sym.h"
+#include "reg_parse.h"
 
 /* read in the Registry file and build the internal representation of the registry */
 
@@ -255,7 +257,7 @@ pre_parse( char * dir, FILE * infile, FILE * outfile )
 	        if ( !strcmp( tokens[F_USE] , tracers[i] ) ) found = 1 ; 
               }
 	      if ( found == 0 ) {
-	        sprintf(tracers[ntracers],tokens[F_USE]) ;
+	        sprintf(tracers[ntracers], "%s", tokens[F_USE]) ;
 	        ntracers++ ;
 
 /* add entries for _b and _bt arrays */
