@@ -32,10 +32,13 @@ For a sample main or calling program see the end of this file.
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #ifndef _WIN32
 # include <strings.h>
 #endif
+#include "sym.h"
+#include "symtab_gen.h"
 
 #define HASHSIZE 1024
 
@@ -43,14 +46,16 @@ For a sample main or calling program see the end of this file.
 static char * symtab[HASHSIZE] ;	
 */
 
-void * malloc() ;
-void * calloc() ;
 
-char * symget(name,newnode,nodename,nodenext,symtab,flag)
-char *name ;
-char *(*newnode)(), **(*nodename)(), **(*nodenext)() ;
-char *symtab[] ;
-int flag ;		/* 1 is create if not there, 0 return NULL if not there */
+char* symget(char *name, sym_nodeptr (*newnode)(), char** (*nodename)(sym_nodeptr p),
+             sym_nodeptr* (*nodenext)(sym_nodeptr p), char* symtab[], int flag)
+// char *name ;
+//char *(*newnode)(), **(*nodename)(), **(*nodenext)() ;
+//sym_nodeptr (*newnode)();
+//char** (*nodename)();
+//sym_ptr* (*nodenext)() ;
+//char *symtab[] ;
+//int flag ;   // 1 is create if not there, 0 return NULL if not there
 {
     int index ; 
     int found ;
@@ -95,8 +100,7 @@ int flag ;		/* 1 is create if not there, 0 return NULL if not there */
 }
 
 int
-hash(name)
-char * name ;
+hash(char *name)
 {
     register int result = 0  ;
     register char * p = name ;
@@ -114,8 +118,7 @@ char * name ;
 /* added 2-19-90, attaches a new hash table to pointer  */
 
 int
-create_ht( p )
-char *** p ; 
+create_ht(char ***p)
 {
     *p = (char **) calloc( HASHSIZE , sizeof( char * ) ) ;
     return(0) ;
@@ -131,10 +134,7 @@ function to each entry
 */
 
 int
-sym_traverse( ht, nodenext, f )
-char *ht[] ;
-char **(*nodenext)() ;
-void (*f)() ;
+sym_traverse( char *ht[], char **(*nodenext)(sym_nodeptr *), void (*f)(char *) )
 {
     char * p, **x ;
     int i ;
@@ -166,34 +166,26 @@ void (*f)() ;
 
 #include <stdio.h>
 
-struct symnode {
-    char * name ;
-    struct symnode *next ;
-} ;
+extern sym_nodeptr symget() ;
 
-extern struct symnode * symget() ;
-
-struct symnode *
+sym_nodeptr
 newnode()
 {
-    struct symnode * malloc() ;
-    return( malloc( sizeof( struct symnode ) ) ) ;
+    return( malloc( sizeof( struct sym_node ) ) ) ;
 }
 
 char **
-nodename(p)
-struct symnode *p ;
+nodename(symnode_ptr p)
 {
     char ** x ;
     x = &(p->name) ;
     return( x ) ;
 }
 
-struct symnode **
-nodenext(p)
-struct symnode *p ;
+symnode_ptr*
+nodenext(sym_nodeptr p)
 {
-    struct symnode **x ;
+    symnode_ptr *x ;
     x = &(p->next) ;
     return( x ) ;
 }
