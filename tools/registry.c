@@ -17,6 +17,14 @@
 #include "registry.h"
 #include "data.h"
 #include "sym.h"
+#include "gen_streams.h"
+#include "reg_parse.h"
+#include "gen_args.h"
+#include "gen_config.h"
+#include "gen_defs.h"
+#include "gen_interp.h"
+#include "gen_comms.h"
+
 
 /* SamT: bug fix: main returns int */
 int
