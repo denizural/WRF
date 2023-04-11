@@ -132,11 +132,11 @@ int gen_scalar_indices_init ( FILE *);
 int hash(char *);
 int gen_nest_interp1 ( FILE *, node_t *, char *, int, int );
 #if ( WRFPLUS == 1 )
-int gen_packs_halo ( FILE *fp , node_t *p, char *shw, int xy /* 0=y,1=x */ , int pu /* 0=pack,1=unpack */, int nta /* 0=NLM,1=TLM,2=ADM */, char * packname, char * commname, int always_interp_mp /* 1 for ARW, varies for NMM */ );
+void gen_packs_halo ( FILE *fp , node_t *p, char *shw, int xy /* 0=y,1=x */ , int pu /* 0=pack,1=unpack */, int nta /* 0=NLM,1=TLM,2=ADM */, char * packname, char * commname, int always_interp_mp /* 1 for ARW, varies for NMM */ );
 #else
-int gen_packs_halo ( FILE *fp , node_t *p, char *shw, int xy /* 0=y,1=x */ , int pu /* 0=pack,1=unpack */, char * packname, char * commname, int always_interp_mp /* 1 for ARW, varies for NMM */ );
+void gen_packs_halo ( FILE *fp , node_t *p, char *shw, int xy /* 0=y,1=x */ , int pu /* 0=pack,1=unpack */, char * packname, char * commname, int always_interp_mp /* 1 for ARW, varies for NMM */ );
 #endif
-int gen_packs ( FILE *fp , node_t *p, int shw, int xy /* 0=y,1=x */ , int pu /* 0=pack,1=unpack */, char * packname, char * commname );
+void gen_packs ( FILE *fp , node_t *p, int shw, int xy /* 0=y,1=x */ , int pu /* 0=pack,1=unpack */, char * packname, char * commname );
 int gen_periods ( char * dirname , node_t * periods );
 int gen_swaps ( char * dirname , node_t * swaps );
 int gen_cycles ( char * dirname , node_t * cycles );
