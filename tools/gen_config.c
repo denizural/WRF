@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "protos.h"
 #include "registry.h"
@@ -9,6 +10,7 @@
 # include <strings.h>
 #endif
 #include "sym.h"
+#include "gen_config.h"
 
 int
 gen_namelist_defines ( char * dirname , int sw_dimension )
