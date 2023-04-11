@@ -11,6 +11,7 @@
 #include "protos.h"
 #include "registry.h"
 #include "data.h"
+#include "gen_interp.h"
 
 int as_long(char *str,long *l) {
   char *endptr=NULL;
