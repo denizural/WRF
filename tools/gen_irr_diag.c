@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <strings.h>
+#include <ctype.h>
 
 int  nChmOpts = 0;
 char rxt_tbl[5][1000][128];
@@ -244,7 +245,7 @@ int irr_diag_scalar_indices( char *dirname )
      return(-2);
    }
 
-   fprintf( fp_inc," \n");
+   fprintf( fp_inc, "%s", " \n");
    sprintf( line,"  chm_opts_cnt(:nchm_opts) = (/ ");
    for( i = 0; i < nChmOpts; i++ ) {
      if( i == 0 ) 
@@ -254,14 +255,14 @@ int irr_diag_scalar_indices( char *dirname )
      strcat( line,piece );
    }
    strcat( line," /)\n" );
-   fprintf( fp_inc,line );
-   fprintf( fp_inc," \n");
+   fprintf( fp_inc, "%s", line );
+   fprintf( fp_inc, "%s", " \n");
 
    for( i = 0; i < nChmOpts; i++ ) {
      sprintf( line,"  chm_opts_name(%d) = '%s'\n",i+1,chm_scheme[i]);
-     fprintf( fp_inc,line );
+     fprintf( fp_inc, "%s", line );
    }
-   fprintf( fp_inc," \n");
+   fprintf( fp_inc, "%s", " \n");
 
    sprintf( line,"  chm_opts_ndx(:nchm_opts) = (/ ");
    for( i = 0; i < nChmOpts; i++ ) {
@@ -272,15 +273,15 @@ int irr_diag_scalar_indices( char *dirname )
      strcat( line,piece );
    }
    strcat( line," /)\n" );
-   fprintf( fp_inc,line );
-   fprintf( fp_inc," \n");
+   fprintf( fp_inc, "%s", line );
+   fprintf( fp_inc, "%s", " \n");
 
    for( i = 0; i < nChmOpts,rxt_cnt[i] > 0; i++ ) {
      for( j = 0; j < rxt_cnt[i]; j++ ) {
        sprintf( line,"     rxtsym(%d,%d) = '%s'\n",j+1,i+1,rxt_tbl[i][j]);
-       fprintf( fp_inc,"%s",line);
+       fprintf( fp_inc, "%s", line);
      }
-     fprintf( fp_inc," \n");
+     fprintf( fp_inc, "%s", " \n");
    }
 /*
    fprintf( fp_inc,"  IF( model_config_rec%%irr_opt(idomain) == 1 ) THEN\n");
