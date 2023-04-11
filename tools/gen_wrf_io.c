@@ -12,6 +12,7 @@
 #include "registry.h"
 #include "data.h"
 #include "sym.h"
+#include "misc.h"
 
 static FILE * fp ;
 
