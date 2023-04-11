@@ -343,6 +343,89 @@ CC_TOOLS        =      $(SCC)
 NETCDFPAR_BUILD	=      CONFIGURE_NETCDFPAR_BUILD
 
 ###########################################################
+#ARCH    Linux x86_64 ppc64le i486 i586 i686, intel oneAPI HPC with ifx & icx #serial smpar dmpar dm+sm
+#
+#        By default, some files are compiled without optimizations to speed up compilation. Removing
+#        respective makefile rules in the end of this file will result in longer compilation time, and, possibly
+#        Out Of Memory messages, but might produce binaries which are substantially faster.
+#
+#        Please visit http://www.intel.com/support/performancetools/sb/cs-028607.htm 
+#        for latest info on how to build WRF with Intel compilers.
+#
+#        If you got Out Of Memory message, there are several options:
+#          1. Check your memory limits (ulimit -a), possibly increasing swap partitions size.
+#          2. Remove any debugging flags (-g, -check, -traceback).
+#          3. Force the problematic file to be compiled with less optimizations (see examples at the 
+#             end of this file), try -no-ip compiler flag.
+#          4. Make sure that you have enough RAM or swap memory available. Some compilation steps
+#             may require up to 20 GB of memory.
+#
+#        This configuration is aimed at accuracy. To improve performance (at the expence of accuracy) you might
+#        consider removing '-fp-model precise' flag from FCBASEOPTS. This enables non value-safe optimizations.
+#        Another option is to add '-ftz' flag, which flushes denormal results to zero when the application is in
+#        the gradual underflow mode. It may improve performance if the denormal values are not critical to the
+#        behavior of your workload. To further improve performance, add suitable vectorization options for your
+#        processor to FCOPTIM (see ifort manpage).
+#
+#        Make sure that you have your Intel oneAPI settings in your shell login scripts. Eg.
+#        source /opt/intel/oneapi/setvars.sh
+#
+#        If you have Intel MPI installed and wish to use instead, make the
+#        following changes to settings below:
+#        DM_FC  = mpiifort
+#        DM_CC  = mpiicc
+#        and source bin64/mpivars.sh file from your Intel MPI installation
+#        before the build.
+#
+#        Suggestions for timing improvements from Craig Mattocks
+#
+#CFLAGS_LOCAL    =       -w -O3 -ip -fp-model precise -w -ftz -align all -fno-alias $(FORMAT_FREE) $(BYTESWAPIO) #-xHost -fp-model fast=2 -no-prec-div -no-prec-sqrt -ftz -no-multibyte-chars 
+#LDFLAGS_LOCAL   =       -ip -fp-model precise -w -ftz -align all -fno-alias $(FORMAT_FREE) $(BYTESWAPIO) #-xHost -fp-model fast=2 -no-prec-div -no-prec-sqrt -ftz -align all -fno-alias -fno-common 
+#FCBASEOPTS_NO_G =       -w -ip -fp-model precise -w -ftz -align all -fno-alias $(FORMAT_FREE) $(BYTESWAPIO) #-xHost -fp-model fast=2 -no-heap-arrays -no-prec-div -no-prec-sqrt -ftz -align all -fno-alias -fno-common $(FORMAT_FREE) $(BYTESWAPIO)
+
+DESCRIPTION     =       INTEL ($SFC/$SCC)
+DMPARALLEL      =       # 1
+OMPCPP          =       # -D_OPENMP
+OMP             =       # -qopenmp -fpp -auto
+OMPCC           =       # -qopenmp -fpp -auto
+SFC             =       ifx
+SCC             =       icx
+CCOMP           =       icx
+DM_FC           =       mpif90 -f90=$(SFC)
+DM_CC           =       mpicc -cc=$(SCC)
+FC              =       CONFIGURE_FC
+CC              =       CONFIGURE_CC
+LD              =       $(FC)
+RWORDSIZE       =       CONFIGURE_RWORDSIZE
+PROMOTION       =       -real-size `expr 8 \* $(RWORDSIZE)` -i4
+ARCH_LOCAL      =       -DNONSTANDARD_SYSTEM_FUNC  CONFIGURE_D_CTSM
+CFLAGS_LOCAL    =       -w -O3 -ip #-xHost -fp-model fast=2 -no-prec-div -no-prec-sqrt -ftz -no-multibyte-chars # -DRSL0_ONLY
+LDFLAGS_LOCAL   =       -ip #-xHost -fp-model fast=2 -no-prec-div -no-prec-sqrt -ftz -align all -fno-alias -fno-common
+CPLUSPLUSLIB    =       
+ESMF_LDFLAG     =       $(CPLUSPLUSLIB)
+FCOPTIM         =       -O3
+FCREDUCEDOPT	=       $(FCOPTIM)
+FCNOOPT		=       -O0 -fno-inline -no-ip
+FCDEBUG         =       # -g $(FCNOOPT) -traceback # -fpe0 -check noarg_temp_created,bounds,format,output_conversion,pointers,uninit -ftrapuv -unroll0 -u
+FORMAT_FIXED    =       -FI
+FORMAT_FREE     =       -FR
+FCSUFFIX        =
+BYTESWAPIO      =       -convert big_endian
+RECORDLENGTH    =       -assume byterecl
+FCBASEOPTS_NO_G =       -ip -fp-model precise -w -ftz -align all -fno-alias $(FORMAT_FREE) $(BYTESWAPIO) #-xHost -fp-model fast=2 -no-heap-arrays -no-prec-div -no-prec-sqrt -fno-common
+FCBASEOPTS      =       $(FCBASEOPTS_NO_G) $(FCDEBUG)
+MODULE_SRCH_FLAG =     
+TRADFLAG        =      CONFIGURE_TRADFLAG
+CPP             =      /lib/cpp CONFIGURE_CPPFLAGS
+AR              =      ar
+ARFLAGS         =      ru
+M4              =      m4
+RANLIB          =      ranlib
+RLFLAGS		=	
+CC_TOOLS        =      $(SCC) 
+NETCDFPAR_BUILD	=      CONFIGURE_NETCDFPAR_BUILD
+
+###########################################################
 #ARCH    Linux x86_64 ppc64le i486 i586 i686, Xeon Phi (MIC architecture) ifort compiler with icc # dm+sm
 #
 
