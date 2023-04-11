@@ -85,6 +85,8 @@
 # include "mpi.h"
 #endif
 #include "rsl_lite.h"
+#include <string.h>
+#include <unistd.h>
 
 /*
 extern int EF_ALIGNMENT;
